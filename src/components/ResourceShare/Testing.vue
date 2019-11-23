@@ -11,7 +11,7 @@
                 <span class="filename">{{k}}:</span>
                 </div>
                 <div>
-                <a :href="v.downloadLink" class="downloadlink">
+                <a :href="v" class="downloadlink">
                 <img :src='icon'>
                 </a>
                 </div>
@@ -26,34 +26,12 @@
 </template>
 
 <script>
+import axios from 'axios'
 import Icon from '@/assets/zip.png'
  
 export default {
     created(){
-      var data = {
-          'mobile':{
-              'downloadLink':'http://127.0.0.1:5000/test'
-          },
-          'pc':{
-              'downloadLink':'http://127.0.0.1:5000/test'
-          },
-          'pc1':{
-              'downloadLink':'http://127.0.0.1:5000/test'
-          },
-          'pc2':{
-              'downloadLink':'http://127.0.0.1:5000/test'
-          },
-          'pc3':{
-              'downloadLink':'http://127.0.0.1:5000/test'
-          },
-          'pc4':{
-              'downloadLink':'http://127.0.0.1:5000/test'
-          },
-          'pc5':{
-              'downloadLink':'http://127.0.0.1:5000/test'
-          }
-      }
-      this.download = data
+      this.api()
     },
     data(){
         return{
@@ -62,7 +40,11 @@ export default {
         }
     },
     methods:{
-  
+        api(){
+            axios.get('http://101.132.69.130:8888/api/testfile').then(res=>{
+                this.download=res.data
+            })
+        }
     }
 }
 </script>
